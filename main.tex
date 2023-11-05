@@ -16,14 +16,10 @@
 
 \usepackage{url}
 
-%%% Macros %%%
-
-% (janp)
 \chardef\clqq=254  \sfcode254=0 \lccode254=0
 \chardef\crqq=255  \sfcode255=0 \lccode255=0
 %\DeclareRobustCommand\uv[1]{{\leavevmode\clqq#1\crqq}}
 \DeclareRobustCommand\uv[1]{{\leavevmode{},,#1''}}
-% (janp) end
 
 \renewcommand{\slidelabel}{}
 \setlength{\textwidth}{0.9\textwidth}
@@ -42,63 +38,21 @@
 
 \begin{document}
 
-\begin{slide}
-\sltitle{Contents}
-\end{slide}
-
-\begin{itemize}
-\item This lecture is mostly about Unix principles and Unix programming in the~C
-language.
-\item \emsl{The lecture is mostly about system calls, i.e. an interface between a
-user space and system kernel.}
-\item For the API, we will follow the \emph{Single UNIX Specification,
-version~4} (SUSv4). Systems that submit to the Open Group for certification and
-pass conformance tests are termed to be compliant with the UNIX standard
-UNIX~V7.  Some versions of AIX, HP-UX and macOS on selected architectures
-are compliant with the previous version SUSv3
-(\url{http://www.opengroup.org/openbrand/register/xy.htm}).
-\item The specific source code examples linked from this material are usually
-tested on Solaris, macOS and Linux.
-\end{itemize}
+\pdfbookmark[0]{intro}{intro}
 
 %%%%%
-\pdfbookmark[0]{intro, programming utilities}{intro}
 
 \begin{slide}
-\sltitle{Contents}
+\sltitle{Intro}
 \end{slide}
 
-\pdfbookmark[1]{Current UNIX and Unix-like Systems}{currentunix}
-
-\begin{slide}
-\sltitle{Proprietary UNIX and Unix-like Systems}
-
-\begin{itemize}
-\item Sun Microsystems, now Oracle: \emsl{SunOS} (defunct), \emsl{Solaris}
-\item Apple: \emsl{macOS} (formerly Mac OS X, Mac OS)
-\item SGI: \emsl{IRIX} (in maintenance mode)
-\item IBM: \emsl{AIX}
-\item HP: \emsl{HP-UX}, \emsl{Tru64 UNIX} (defunct, formerly by Compaq)
-\item SCO: \emsl{SCO Unix} (discontinued)
-\item BSD/OS: \emsl{BSDi} (discontinued)
-\item Xinuos (formerly Novell): \emsl{UNIXware}
-\end{itemize}
-\end{slide}
+%%%%%
 
 \begin{slide}
 \sltitle{Open source Unix-like Systems}
 
 \begin{itemize}
-\item rather extensive number of \emsl{Linux} distributions
-\item \emsl{FreeBSD}
-\item \emsl{NetBSD}
-\item \emsl{OpenBSD}
-\item \emsl{DragonflyBSD}
-\begin{itemize}
-\item all BSD variants have roots in the 4.3BSD-Lite source code
-\end{itemize}
-\item \emsl{Minix}, micro-kernel based
-\item \emsl{Illumos}, based on Solaris
+\item foo
 \end{itemize}
 \end{slide}
 
