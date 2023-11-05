@@ -73,15 +73,6 @@
     \end{minipage}}
 
 \newcommand{\bs}{\char92\relax} % TT backslash
-% http://tex.stackexchange.com/questions/9363/how-does-one-insert-a-backslash-or-a-tilde-into-latex
-\newcommand{\tilda}{\char`\~} % TT tilda
-
-\newtoks\prgcharsI\newtoks\prgcharsII
-{\catcode`\_=13\catcode`\&=13\global\prgcharsI={_}\global\prgcharsII={&}}
-\def\prgchars{ % Do not require backslashes for these characters often used
-                % in C program source code
-    \catcode`\_=13\catcode`\&=13
-    \expandafter\def\the\prgcharsI{\_}\expandafter\def\the\prgcharsII{\&}}
 
 \centerslidesfalse
 
