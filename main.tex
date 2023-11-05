@@ -65,9 +65,6 @@
 % What should be checked
 \newcommand{\CHECK}[1]{{\color[rgb]{1,0,0} $\star$#1$\star$}}
 
-\newenvironment{itemize2} % Itemize with smaller font
-    {\begin{itemize}\small} {\end{itemize}}
-
 \newsavebox{\boxTMP}
 \newcommand{\raisetab}[1]{ % Align first table row with other text
     \sbox{\boxTMP}{\begin{tabular}{c}\hline X\\\hline\end{tabular}}
@@ -261,27 +258,9 @@ history, go check \url{https://www.levenez.com/unix/}.
 \begin{itemize}
 \renewcommand{\baselinestretch}{0.8}
 \item \emsl{SVID} (System~V Interface Definition)
-    \begin{itemize2}
-    \item \uv{purple book}, published by AT\&T first in 1985
-    \item today at version SVID4 from 1995 (SVID3 corresponds to SVR4)
-    \end{itemize2}
 \item \emsl{POSIX} (Portable Operating System based on UNIX)
-    \begin{itemize2}
-    \item family of standards published by the IEEE organization marked
-    P1003.xx, gradually incorporated into ISO standards
-    \end{itemize2}
 \item \emsl{XPG} (X/Open Portability Guide)
-    \begin{itemize2}
-    \item recommendation of the X/Open consortium, that was founded in 1984
-    by leading UNIX platform companies
-    \end{itemize2}
 \item \emsl{Single UNIX Specification}
-    \begin{itemize2}
-    \item standard of the The Open Group organization founded in 1996 via
-    merging X/Open and OSF
-    \item today at Version~4 (\emsl{SUSv4})
-    \item compliance is a requisite condition for using the UNIX trademark
-    \end{itemize2}
 \end{itemize}
 \end{slide}
 
