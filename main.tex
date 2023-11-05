@@ -1,10 +1,3 @@
-% Unix/Linux programming in C
-%
-% Authors: Martin Beran, Jan Pechanec, Vladimir Kotal
-%
-% These are slides with notes.
-%
-
 \AtBeginDocument[seminar]{%
   \pdfhorigin=1sp
   \pdfvorigin=1sp
@@ -19,16 +12,10 @@
 
 \usepackage{nth}
 
-% color doc: http://en.wikibooks.org/wiki/LaTeX/Colors
-% color defs: http://www.w3schools.com/html/html_colors.asp
 \usepackage{color}
 \definecolor{MyDarkBlue}{RGB}{71,57,146} % BlueViolet
 \definecolor{MyDarkRed}{RGB}{139,00,00}
 
-% hyperref docs:
-%   http://www.tug.org/applications/hyperref/manual.html
-%   http://en.wikibooks.org/wiki/LaTeX/Hyperlinks
-%
 \usepackage[bookmarks,breaklinks=true,%
 	colorlinks=true,linkcolor=MyDarkBlue,urlcolor=MyDarkRed,%
 	pdftex,%
@@ -52,10 +39,6 @@
 \usepackage{upquote}
 
 %%% Macros %%%
-
-% colored frame around source code path to examples
-% which is actually a link
-\newcommand{\example}[1]{\fcolorbox{cyan}{white}{\href{https://github.com/devnull-cz/unix-linux-prog-in-c-src/blob/master/#1}{\texttt{#1}}}}
 
 % (janp)
 \chardef\clqq=254  \sfcode254=0 \lccode254=0
