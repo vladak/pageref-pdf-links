@@ -18,7 +18,6 @@
 
 \chardef\clqq=254  \sfcode254=0 \lccode254=0
 \chardef\crqq=255  \sfcode255=0 \lccode255=0
-%\DeclareRobustCommand\uv[1]{{\leavevmode\clqq#1\crqq}}
 \DeclareRobustCommand\uv[1]{{\leavevmode{},,#1''}}
 
 \renewcommand{\slidelabel}{}
@@ -26,8 +25,6 @@
 
 \newcommand{\sltitle}[1]{{\centering\textbf{\Large #1}
     \vskip 2em plus 0pt minus 2em\par}} % Slide title
-
-\newcommand{\emsl}[1]{\textbf{#1}} % Emphasizing in slides
 
 \centerslidesfalse
 
