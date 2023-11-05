@@ -138,7 +138,220 @@
 
 \begin{document}
 
-\input{intro.tex}
+\begin{slide}
+\centerslidestrue
+\begin{center}
+\title{\LARGE Unix/Linux Programming in C}
+\author{(NSWI015)}
+\date{Version: \rm\today}
+\maketitle
+
+\vspace{2ex}
+{\small (c) 2011 -- 2023 Vladim\'{i}r Kotal}\\
+{\small (c) 2005 -- 2011, 2016 -- 2022 Jan Pechanec}\\
+{\small (c) 1999 -- 2004 Martin Beran}
+
+\vspace{2ex}
+Department of SISAL\\
+Faculty of Mathematics and Physics, Charles University\\
+Malostransk\'{e} n\'{a}m. 25, 118 00 Praha 1
+
+\end{center}
+\end{slide}
+
+\begin{itemize}
+\item This is official material for the class \emph{Unix/Linux Programming in C}
+(NSWI015) lectured at the Faculty of Mathematics and Physics, Charles University
+in Prague.
+\item This material is published under the
+\href{http://creativecommons.org/licenses/by-nc-sa/3.0/cz/}{Creative Commons
+BY-NC-SA 3.0} license and is always a work in progress, see the history on
+GitHub:\\
+\url{https://github.com/devnull-cz/unix-linux-prog-in-c}
+\item To download the latest version, go to the
+\href{https://github.com/devnull-cz/unix-linux-prog-in-c/releases}{releases}
+on GitHub.
+\item Source code referenced from this material is published in
+\href{http://creativecommons.org/licenses/publicdomain/}{Public Domain} unless
+specified otherwise in the files.
+\item The source code files can be found on GitHub here:\\
+\url{https://github.com/devnull-cz/unix-linux-prog-in-c-src}
+\item In case you find any errors either in the text or in the example programs,
+we would appreciate you letting us know. Especially do not hesitate to create new
+issues on \url{https://github.com/devnull-cz/unix-linux-prog-in-c/issues}.
+\end{itemize}
+
+\pagebreak
+
+\begin{slide}
+\sltitle{Contents}
+\slidecontents{0}
+\end{slide}
+
+\begin{itemize}
+\item This lecture is mostly about Unix principles and Unix programming in the~C
+language.
+\item \emsl{The lecture is mostly about system calls, i.e. an interface between a
+user space and system kernel.}
+\item For the API, we will follow the \emph{Single UNIX Specification,
+version~4} (SUSv4). Systems that submit to the Open Group for certification and
+pass conformance tests are termed to be compliant with the UNIX standard
+UNIX~V7.  Some versions of AIX, HP-UX and macOS on selected architectures
+are compliant with the previous version SUSv3
+(\url{http://www.opengroup.org/openbrand/register/xy.htm}).
+\item The specific source code examples linked from this material are usually
+tested on Solaris, macOS and Linux.
+\end{itemize}
+
+%%%%%
+\pdfbookmark[0]{intro, programming utilities}{intro}
+
+\begin{slide}
+\sltitle{Contents}
+\slidecontents{1}
+\end{slide}
+
+\pdfbookmark[1]{Current UNIX and Unix-like Systems}{currentunix}
+
+\begin{slide}
+\sltitle{Proprietary UNIX and Unix-like Systems}
+
+\begin{itemize}
+\item Sun Microsystems, now Oracle: \emsl{SunOS} (defunct), \emsl{Solaris}
+\item Apple: \emsl{macOS} (formerly Mac OS X, Mac OS)
+\item SGI: \emsl{IRIX} (in maintenance mode)
+\item IBM: \emsl{AIX}
+\item HP: \emsl{HP-UX}, \emsl{Tru64 UNIX} (defunct, formerly by Compaq)
+\item SCO: \emsl{SCO Unix} (discontinued)
+\item BSD/OS: \emsl{BSDi} (discontinued)
+\item Xinuos (formerly Novell): \emsl{UNIXware}
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\sltitle{Open source Unix-like Systems}
+
+\begin{itemize}
+\item rather extensive number of \emsl{Linux} distributions
+\item \emsl{FreeBSD}
+\item \emsl{NetBSD}
+\item \emsl{OpenBSD}
+\item \emsl{DragonflyBSD}
+\begin{itemize}
+\item all BSD variants have roots in the 4.3BSD-Lite source code
+\end{itemize}
+\item \emsl{Minix}, micro-kernel based
+\item \emsl{Illumos}, based on Solaris
+\end{itemize}
+\end{slide}
+
+\begin{itemize}
+\item Note that \emsl{Linux is a kernel}, not the whole system.  In contrast to
+FreeBSD for example, which covers both the kernel and the userland.  It is
+better to say a ``Linux distribution'' if you discuss a whole system that is
+built around the Linux kernel.
+\item FreeBSD and NetBSD forked from 386BSD (now defunct) in 1993, OpenBSD
+forked from NetBSD in 1995, and DragonflyBSD forked from FreeBSD in 2003.
+386BSD itself was based on 4.3BSD-Lite.  However, the history is much more
+complicated, as usual.
+\item Presently, the ``UNIX'' trademark can be only used by systems that passed
+conformance tests defined in the Single UNIX Specification (SUS).
+\item From those systems listed above, only macOS, AIX, and HP-UX are
+UNIX~03 compliant (\url{http://www.opengroup.org/openbrand/register/}).  Other
+non-certified systems, are often described as ``Unix-like'', even when in many
+cases they closely follow the standard.  However, the word ``Unix'' is often used
+for systems from either group.
+\item The above list is a tiny fraction of the whole Unix world.  Every
+proprietary Unix variant likely came from either UNIX~V or BSD, and added its
+own features.  This resulted in quite a few standards as well, see page
+\pageref{UNIXSTANDARDS}.  In the end vendors agreed upon a small set of those.
+\item If you are interested in a detailed and up-to-date Unix system version
+history, go check \url{https://www.levenez.com/unix/}.
+\end{itemize}
+
+%%%%%
+
+\pdfbookmark[1]{UNIX standards}{unixstd}
+
+\begin{slide}
+\sltitle{UNIX standards}
+\begin{itemize}
+\renewcommand{\baselinestretch}{0.8}
+\item \emsl{SVID} (System~V Interface Definition)
+    \begin{itemize2}
+    \item \uv{purple book}, published by AT\&T first in 1985
+    \item today at version SVID4 from 1995 (SVID3 corresponds to SVR4)
+    \end{itemize2}
+\item \emsl{POSIX} (Portable Operating System based on UNIX)
+    \begin{itemize2}
+    \item family of standards published by the IEEE organization marked
+    P1003.xx, gradually incorporated into ISO standards
+    \end{itemize2}
+\item \emsl{XPG} (X/Open Portability Guide)
+    \begin{itemize2}
+    \item recommendation of the X/Open consortium, that was founded in 1984
+    by leading UNIX platform companies
+    \end{itemize2}
+\item \emsl{Single UNIX Specification}
+    \begin{itemize2}
+    \item standard of the The Open Group organization founded in 1996 via
+    merging X/Open and OSF
+    \item today at Version~4 (\emsl{SUSv4})
+    \item compliance is a requisite condition for using the UNIX trademark
+    \end{itemize2}
+\end{itemize}
+\end{slide}
+
+\label{UNIXSTANDARDS}
+
+\begin{itemize}
+\item The very basic information is that the area of UNIX standards is very
+complex and incomprehensible on a first sight.
+\item AT\&T allowed the producers to call its own commercial UNIX variant
+``System V'' only if it complied to the SVID standard conditions. AT\&T also
+published \emph{System~V Verification Suite} (SVVS), that checked whether a given
+system complies to the standard.
+\item POSIX (Portable Operating System Interface) is a standardization effort
+of the IEEE organization (Institute of Electrical and Electronics Engineers).
+\item SUSv4 is a common standard of The Open Group, IEEE (Std. 1003.1, 2008
+Edition) and ISO (ISO/IEC 9945-2008).
+\item To certify a given system for the Single Unix Specification, it is necessary
+to pass a series of tests (on given architecture, e.g. 64-bit x86).
+The results of the tests are then evaluated. The tests themselves are unified into
+so called \emph{test suites}, which are sets of automatic tests that go through
+the system and verify if it implements the interfaces specified in the standard.
+For example, for SUSv3 there are 10 such test suites.
+\item The interfaces specified by the POSIX.1-2008 standard are divided into 4
+basic groups: XSH (System Interfaces), XCU (Shell and Utilities), XBD
+(Base definitions). W.r.t. number of interfaces, the biggest of them is XSH which
+contains more than 1000 interfaces.
+\item The interface groups of POSIX together with the Xcurses group, are part
+of the Single Unix Specification (however not part of POSIX base in the IEEE Std
+1003.1-2001 standard) which includes 1742 interfaces in total, which form the Single Unix
+Specification (2003). The SUS interface tables are here:
+\url{http://www.unix.org/version3/inttables.pdf}
+\item Commercial UNIXes largely follow the Single UNIX Specification, compliance
+to this standard is the condition to use the UNIX trademark
+(the UNIX 98 brand corresponds to SUSv2, UNIX 03 corresponds to SUSv3, SUSv4 is
+UNIX V7 - do not mix it up with historical V7 UNIX). It is built on the POSIX
+base.
+\item We are going to follow SUSv4 for APIs in this lecture. The data structure
+definitions and algorithms used by the kernel will be mostly based on
+System~V Rel.~4 to keep things simple.
+\item On Solaris there is an extensive \texttt{standards(5)} manual page, where
+lots of information about standards can be found in one place.
+Individual commands compliant to the standard are moreover placed
+into special directories, e.g. the \texttt{tr} program is located in
+\texttt{/usr/xpg4/bin/} and \texttt{/usr/xpg6/bin/} directories, in each there
+is a version of the program compliant to the respective standard.
+The options and behavior specified by the standard can be then relied upon e.g.
+when writing shell scripts.
+\item Also on Solaris, look into the
+ifdef([[[NOSPELLCHECK]]], [[[
+\texttt{/usr/inc{}lude/sys/fea\-ture\-\_tests.h}]]]) header file.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{slide}
 \centerslidestrue
