@@ -70,31 +70,6 @@
 
 \centerslidesfalse
 
-\newcounter{topicval}
-
-\newcommand{\slidecontents}[1]{%
-  \setcounter{topicval}{#1}%
-  \begin{itemize}
-  \topic{1}{Introduction, Unix and C, programming tools}
-  \topic{2}{Basic Unix concepts and conventions, its API}
-  \topic{3}{Access rights, devices}
-  \topic{4}{Process manipulation, program execution}
-  \topic{5}{Signals}
-  \topic{6}{Process synchronization and interprocess communication}
-  \topic{7}{Network programming}
-  \topic{8}{Programming with threads}
-  \topic{9}{Appendix}
-  \end{itemize}%
-}
-\newcommand{\topic}[2]{%
-  \item\relax
-  \ifnum #1=\value{topicval}%
-    \textbf{#2}%
-  \else
-    #2%
-  \fi
-}
-
 \begin{document}
 
 \begin{slide}
@@ -144,7 +119,6 @@ issues on \url{https://github.com/devnull-cz/unix-linux-prog-in-c/issues}.
 
 \begin{slide}
 \sltitle{Contents}
-\slidecontents{0}
 \end{slide}
 
 \begin{itemize}
@@ -167,7 +141,6 @@ tested on Solaris, macOS and Linux.
 
 \begin{slide}
 \sltitle{Contents}
-\slidecontents{1}
 \end{slide}
 
 \pdfbookmark[1]{Current UNIX and Unix-like Systems}{currentunix}
